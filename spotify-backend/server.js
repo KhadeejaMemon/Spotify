@@ -50,7 +50,10 @@ app.use(
   })
 );
 
-app.use("/uploads", express.static(path.join(__dirname, "Uploads")));
+app.use(
+  "/uploads",
+  express.static(path.join(__dirname, "uploads"))
+);
 
 // Routes
 
