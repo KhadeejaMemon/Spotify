@@ -3,8 +3,8 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
-const dns = require("dns");
-dns.setServers(["8.8.8.8", "1.1.1.1"]);
+// const dns = require("dns");
+// dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 
 const connectDB = require("./config/db");
@@ -42,12 +42,23 @@ app.use(express.urlencoded({
 
 app.use(cookieParser());
 
+const allowedOrigins = [
+  process.env.CLIENT_URL,        // production frontend
+  "http://localhost:5173",       // local dev (Vite default port)
+];
 
 app.use(
- cors({
-   origin: process.env.CLIENT_URL,
-   credentials:true
- })
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // Postman etc.
+      if (allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
 );
 
 
