@@ -31,13 +31,13 @@ const createSong = async (req, res) => {
     }
 
     // Files
-    const thumbnail = req.files?.thumbnail
-      ? `/uploads/songs/${req.files.thumbnail[0].filename}`
-      : "";
+   const thumbnail = req.files?.thumbnail
+  ? `/uploads/thumbnails/${req.files.thumbnail[0].filename}`
+  : "";
 
-    const audio = req.files?.audio
-      ? `/uploads/audio/${req.files.audio[0].filename}`
-      : "";
+const audio = req.files?.audio
+  ? `/uploads/songs/${req.files.audio[0].filename}`
+  : "";
 
     if (!audio) {
       return res.status(400).json({
@@ -69,10 +69,14 @@ const createSong = async (req, res) => {
   }
 };
 // Get All Songs
-// Get All Songs
 const getSongs = async (req, res) => {
   try {
-    let { sort } = req.query;
+    let { page = 1, limit = 10, sort } = req.query;
+
+    page = parseInt(page);
+    limit = parseInt(limit);
+
+    const skip = (page - 1) * limit;
 
     let sortOption = {};
 
@@ -80,19 +84,21 @@ const getSongs = async (req, res) => {
       sortOption = { createdAt: -1 };
     } else if (sort === "oldest") {
       sortOption = { createdAt: 1 };
-    } else {
-      sortOption = { createdAt: -1 };
     }
 
     const songs = await Song.find()
       .populate("artist", "name image")
       .populate("album", "title image")
-      .sort(sortOption);
+      .sort(sortOption)
+      .skip(skip)
+      .limit(limit);
 
     const total = await Song.countDocuments();
 
     res.status(200).json({
       success: true,
+      page,
+      totalPages: Math.ceil(total / limit),
       totalSongs: total,
       songs,
     });
@@ -149,13 +155,13 @@ const updateSong = async (req, res) => {
     song.genre = req.body.genre || song.genre;
     song.duration = req.body.duration || song.duration;
 
-    if (req.files?.thumbnail) {
-      song.thumbnail = `/uploads/songs/${req.files.thumbnail[0].filename}`;
-    }
+   if (req.files?.thumbnail) {
+  song.thumbnail = `/uploads/thumbnails/${req.files.thumbnail[0].filename}`;
+}
 
-    if (req.files?.audio) {
-      song.audio = `/uploads/audio/${req.files.audio[0].filename}`;
-    }
+if (req.files?.audio) {
+  song.audio = `/uploads/songs/${req.files.audio[0].filename}`;
+}
 
     await song.save();
 

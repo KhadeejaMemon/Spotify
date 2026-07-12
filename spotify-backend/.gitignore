@@ -4,8 +4,7 @@ node_modules/
 # Environment
 .env
 
-# Upload files
-uploads/
+
 
 # Logs
 logs

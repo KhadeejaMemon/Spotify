@@ -22,7 +22,7 @@ const ArtistCard = ({ artist }) => {
         <img
           src={
             artist.image
-              ? `https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${artist.image}`
+              ? artist.image
               : "/default-artist.png"
           }
           alt={artist.name}

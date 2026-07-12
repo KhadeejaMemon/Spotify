@@ -151,8 +151,7 @@ const SongCard = ({ song, songs }) => {
 
           <img
 
-            src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${song.thumbnail}`}
-
+           src={song.thumbnail}
             alt={song.title}
 
             className="

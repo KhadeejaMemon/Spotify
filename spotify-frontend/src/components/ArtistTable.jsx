@@ -70,7 +70,7 @@ const ArtistTable = ({ artists, onDelete }) => {
 
                       src={
                         artist.image
-                        ? `https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${artist.image}`
+                        ? artist.image
                         : "/default-user.png"
                       }
 

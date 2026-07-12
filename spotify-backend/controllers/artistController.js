@@ -124,9 +124,9 @@ const updateArtist = async (req, res) => {
     artist.country = req.body.country || artist.country;
     artist.verified = req.body.verified ?? artist.verified;
 
-    if (req.file) {
-      artist.image = `/uploads/artists/${req.file.filename}`;
-    }
+   if (req.file) {
+  artist.image = `/uploads/artists/${req.file.filename}`;
+}
 
     await artist.save();
 

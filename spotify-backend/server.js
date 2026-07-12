@@ -21,7 +21,8 @@ const historyRoutes = require("./routes/historyRoutes");
 
 const errorHandler = require("./middleware/errorMiddleware");
 
-
+const dns = require("dns");
+dns.setServers(["8.8.8.8", "1.1.1.1"]);
 dotenv.config();
 
 
