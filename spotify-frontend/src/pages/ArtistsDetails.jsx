@@ -140,7 +140,7 @@ const ArtistDetail = () => {
 
           <img
 
-            src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${artist.image}`}
+            src={`https://spotify-backend-gilt.vercel.app${artist.image}`}
 
             alt={artist.name}
 
@@ -309,7 +309,7 @@ const ArtistDetail = () => {
 
                   <img
 
-                    src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${song.thumbnail}`}
+                    src={`https://spotify-backend-gilt.vercel.app${song.thumbnail}`}
 
                     className="
                       w-12

@@ -35,7 +35,7 @@ const SongTable = ({ songs, onDelete }) => {
 
               <td className="p-3">
                <img
-  src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${song.thumbnail}`}
+  src={`https://spotify-backend-gilt.vercel.app${song.thumbnail}`}
   alt={song.title}
   className="w-16 h-16 object-cover rounded"
 />

@@ -143,11 +143,11 @@ const PlaylistDetail = () => {
 
   const image =
     playlist.coverImage
-      ? `https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${playlist.coverImage}`
+      ? `https://spotify-backend-gilt.vercel.app${playlist.coverImage}`
       :
       playlist.songs?.length
       ?
-      `https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${playlist.songs[0].thumbnail}`
+      `https://spotify-backend-gilt.vercel.app${playlist.songs[0].thumbnail}`
       :
       "https://placehold.co/300x300";
 
@@ -338,7 +338,7 @@ const PlaylistDetail = () => {
 
                 <img
 
-                  src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${song.thumbnail}`}
+                  src={`https://spotify-backend-gilt.vercel.app${song.thumbnail}`}
 
                   className="
                     w-14

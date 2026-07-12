@@ -19,7 +19,7 @@ const image =
     ? (
         playlist.songs[0].thumbnail.startsWith("http")
           ? playlist.songs[0].thumbnail
-          : `https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app${playlist.songs[0].thumbnail}`
+          : `https://spotify-backend-gilt.vercel.app${playlist.songs[0].thumbnail}`
       )
     : "https://placehold.co/300x300?text=Playlist";
 

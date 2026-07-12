@@ -56,7 +56,7 @@ const playSong = async (song, songs = playlist) => {
 
 
   audioRef.current.src =
-    `https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${song.audio}`;
+    `https://spotify-backend-gilt.vercel.app${song.audio}`;
 
 
   audioRef.current.play();

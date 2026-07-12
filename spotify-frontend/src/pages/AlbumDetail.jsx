@@ -65,7 +65,7 @@ const { playSong } = usePlayer();
           {/* Album Image */}
 
           <img
-            src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${album.coverImage}`}
+            src={`https://spotify-backend-gilt.vercel.app${album.coverImage}`}
             alt={album.title}
             className="w-64 h-64 rounded-lg shadow-2xl object-cover"
           />
@@ -143,7 +143,7 @@ const { playSong } = usePlayer();
                   </span>
 
                   <img
-                    src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${song.thumbnail}`}
+                    src={`https://spotify-backend-gilt.vercel.app${song.thumbnail}`}
                     alt={song.title}
                     className="w-12 h-12 rounded object-cover"
                   />
