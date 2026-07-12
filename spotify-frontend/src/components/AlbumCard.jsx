@@ -11,7 +11,7 @@ const AlbumCard = ({ album }) => {
       <div className="overflow-hidden rounded-lg">
 
         <img
-          src={`http://localhost:5000${album.coverImage}`}
+          src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${album.coverImage}`}
           alt={album.title}
           className="w-full aspect-square object-cover group-hover:scale-105 transition duration-300"
         />

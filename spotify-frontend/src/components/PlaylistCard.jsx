@@ -15,10 +15,10 @@ const PlaylistCard = ({ playlist }) => {
 
   const image =
     playlist.coverImage
-      ? `http://localhost:5000${playlist.coverImage}`
+      ? `https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${playlist.coverImage}`
       : playlist.songs?.length > 0 &&
         playlist.songs[0]?.thumbnail
-      ? `http://localhost:5000${playlist.songs[0].thumbnail}`
+      ? `https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${playlist.songs[0].thumbnail}`
       : "https://placehold.co/300x300?text=Playlist";
 
 

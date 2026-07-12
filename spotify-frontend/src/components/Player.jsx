@@ -43,7 +43,7 @@ const Player = () => {
 
       <div className="flex items-center gap-3 w-1/4">
         <img
-          src={`http://localhost:5000${currentSong.thumbnail}`}
+          src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${currentSong.thumbnail}`}
           alt={currentSong.title}
           className="w-14 h-14 rounded"
         />

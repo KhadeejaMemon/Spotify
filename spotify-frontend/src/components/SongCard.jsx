@@ -151,7 +151,7 @@ const SongCard = ({ song, songs }) => {
 
           <img
 
-            src={`http://localhost:5000${song.thumbnail}`}
+            src={`https://spotify-backend-2989kfwwg-khadeeja-memon.vercel.app/${song.thumbnail}`}
 
             alt={song.title}
 
