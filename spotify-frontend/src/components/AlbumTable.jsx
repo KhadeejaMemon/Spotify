@@ -43,7 +43,7 @@ const AlbumTable = ({ albums, onDelete }) => {
                     <img
                       src={
                         album.coverImage
-                          ? album.coverImage
+                          ? `https://spotify-backend-gilt.vercel.app${album.coverImage}`
                           : "/default-album.png"
                       }
                       alt={album.title}

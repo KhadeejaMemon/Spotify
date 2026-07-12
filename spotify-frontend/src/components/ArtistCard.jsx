@@ -22,7 +22,7 @@ const ArtistCard = ({ artist }) => {
         <img
           src={
             artist.image
-              ? artist.image
+              ? `https://spotify-backend-gilt.vercel.app${artist.image}`
               : "/default-artist.png"
           }
           alt={artist.name}

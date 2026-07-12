@@ -14,7 +14,7 @@ const PlaylistCard = ({ playlist }) => {
 
 const image =
   playlist.coverImage
-    ? playlist.coverImage
+    ? `https://spotify-backend-gilt.vercel.app${playlist.coverImage}`
     : playlist.songs?.length > 0 && playlist.songs[0]?.thumbnail
     ? (
         playlist.songs[0].thumbnail.startsWith("http")
@@ -102,6 +102,7 @@ const image =
         ">
 
           <img
+
 
             src={image}
 

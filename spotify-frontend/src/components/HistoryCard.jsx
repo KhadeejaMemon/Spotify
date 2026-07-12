@@ -23,7 +23,8 @@ const HistoryCard = ({ item, history }) => {
       <div className="relative overflow-hidden rounded-xl aspect-square">
 
         <img
-          src={item.song.thumbnail}
+          src={`https://spotify-backend-gilt.vercel.app${item.song.thumbnail}`}
+
           alt={item.song.title}
           className="
             w-full
