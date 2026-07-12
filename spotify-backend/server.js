@@ -41,28 +41,17 @@ app.use(express.urlencoded({
   extended:true
 }));
 
-app.use(cookieParser());
-
-const allowedOrigins = [
-  process.env.CLIENT_URL,        // production frontend
-  "http://localhost:5173",       // local dev (Vite default port)
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // Postman etc.
-      if (allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: [
+      "http://localhost:5173",
+      "https://spotify-frontend-eight.vercel.app",
+    ],
     credentials: true,
   })
 );
 
-
+app.use("/uploads", express.static(path.join(__dirname, "Uploads")));
 
 // Routes
 
@@ -74,7 +63,6 @@ app.use("/api/albums", albumRoutes);
 
 app.use("/api/songs", songRoutes);
 
-app.use("/uploads", express.static("uploads"));
 
 app.use("/api/playlists", playlistRoutes);
 
