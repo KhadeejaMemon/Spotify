@@ -1,31 +1,11 @@
 const multer = require("multer");
 const path = require("path");
-const fs = require("fs");
-
-// =======================
-// Upload Base Path
-// =======================
-const uploadPath = path.join(__dirname, "../uploads");
-
-// =======================
-// Create Upload Folders
-// =======================
-const createFolder = (folder) => {
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder, { recursive: true });
-  }
-};
-
-createFolder(path.join(uploadPath, "avatars"));
-createFolder(path.join(uploadPath, "artists"));
-createFolder(path.join(uploadPath, "albums"));
-createFolder(path.join(uploadPath, "songs"));
-createFolder(path.join(uploadPath, "thumbnails"));
 
 
 // =======================
 // Common Image Filter
 // =======================
+
 const imageFilter = (req, file, cb) => {
 
   const allowedTypes = [
@@ -45,12 +25,14 @@ const imageFilter = (req, file, cb) => {
   } else {
     cb(new Error("Only image files allowed"), false);
   }
+
 };
 
 
 // =======================
-// File Name Generator
+// File Name
 // =======================
+
 const fileName = (file) => {
 
   return (
@@ -63,169 +45,154 @@ const fileName = (file) => {
 };
 
 
+
 // =======================
-// Avatar Storage
+// Avatar
 // =======================
+
 const avatarStorage = multer.diskStorage({
 
-  destination: (req, file, cb) => {
-    cb(null, path.join(uploadPath, "avatars"));
-  },
+ destination:(req,file,cb)=>{
+   cb(null,"uploads/avatars");
+ },
 
-  filename: (req, file, cb) => {
-    cb(null, fileName(file));
-  },
+ filename:(req,file,cb)=>{
+   cb(null,fileName(file));
+ }
 
 });
 
 
+
 // =======================
-// Artist Storage
+// Artist
 // =======================
+
 const artistStorage = multer.diskStorage({
 
-  destination: (req, file, cb) => {
-    cb(null, path.join(uploadPath, "artists"));
-  },
+ destination:(req,file,cb)=>{
+   cb(null,"uploads/artists");
+ },
 
-  filename: (req, file, cb) => {
-    cb(null, fileName(file));
-  },
+ filename:(req,file,cb)=>{
+   cb(null,fileName(file));
+ }
 
 });
 
 
+
 // =======================
-// Album Storage
+// Album
 // =======================
+
 const albumStorage = multer.diskStorage({
 
-  destination: (req, file, cb) => {
-    cb(null, path.join(uploadPath, "albums"));
-  },
+ destination:(req,file,cb)=>{
+   cb(null,"uploads/albums");
+ },
 
-  filename: (req, file, cb) => {
-    cb(null, fileName(file));
-  },
+ filename:(req,file,cb)=>{
+   cb(null,fileName(file));
+ }
 
 });
 
 
+
 // =======================
-// Song Storage
+// Song
 // =======================
+
 const songStorage = multer.diskStorage({
 
-  destination: (req, file, cb) => {
+ destination:(req,file,cb)=>{
 
-    if (file.fieldname === "thumbnail") {
+   if(file.fieldname==="thumbnail"){
+     cb(null,"uploads/thumbnails");
+   }
 
-      cb(null, path.join(uploadPath, "thumbnails"));
+   else if(file.fieldname==="audio"){
+     cb(null,"uploads/songs");
+   }
 
-    } else if (file.fieldname === "audio") {
-
-      cb(null, path.join(uploadPath, "songs"));
-
-    }
-
-  },
+ },
 
 
-  filename: (req, file, cb) => {
-
-    cb(null, fileName(file));
-
-  },
+ filename:(req,file,cb)=>{
+   cb(null,fileName(file));
+ }
 
 });
+
 
 
 // =======================
 // Song Filter
 // =======================
-const songFilter = (req, file, cb) => {
+
+const songFilter=(req,file,cb)=>{
+
+ if(file.fieldname==="thumbnail"){
+   return imageFilter(req,file,cb);
+ }
 
 
-  if (file.fieldname === "thumbnail") {
+ if(file.fieldname==="audio"){
 
-    return imageFilter(req, file, cb);
+   if(file.mimetype.startsWith("audio/")){
+     return cb(null,true);
+   }
 
-  }
+   return cb(new Error("Only audio files allowed"),false);
 
-
-  if (file.fieldname === "audio") {
-
-
-    if (file.mimetype.startsWith("audio/")) {
-
-      return cb(null, true);
-
-    }
+ }
 
 
-    return cb(
-      new Error("Only audio files allowed"),
-      false
-    );
-
-  }
-
-
-  cb(
-    new Error("Invalid file"),
-    false
-  );
+ cb(new Error("Invalid file"),false);
 
 };
 
 
+
 // =======================
-// Upload Middlewares
+// Uploads
 // =======================
 
 const uploadAvatar = multer({
-
-  storage: avatarStorage,
-  fileFilter: imageFilter,
-
+ storage:avatarStorage,
+ fileFilter:imageFilter
 });
 
 
 const uploadArtist = multer({
-
-  storage: artistStorage,
-  fileFilter: imageFilter,
-
+ storage:artistStorage,
+ fileFilter:imageFilter
 });
 
 
 const uploadAlbum = multer({
-
-  storage: albumStorage,
-  fileFilter: imageFilter,
-
+ storage:albumStorage,
+ fileFilter:imageFilter
 });
 
 
 const uploadSong = multer({
 
-  storage: songStorage,
-  fileFilter: songFilter,
+ storage:songStorage,
+ fileFilter:songFilter,
 
-  limits: {
-    fileSize: 50 * 1024 * 1024,
-  },
+ limits:{
+  fileSize:50*1024*1024
+ }
 
 });
 
 
-// =======================
-// Export
-// =======================
 
-module.exports = {
-  uploadAvatar,
-  uploadArtist,
-  uploadAlbum,
-  uploadSong,
+module.exports={
+ uploadAvatar,
+ uploadArtist,
+ uploadAlbum,
+ uploadSong
 };
