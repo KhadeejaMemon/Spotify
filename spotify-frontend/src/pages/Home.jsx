@@ -54,20 +54,20 @@ const Home = () => {
   }
 
   return (
-    <div className="p-6 space-y-12">
+<div className="px-4 py-5 md:p-6 space-y-8 md:space-y-12">
 
       {/* Header */}
-      <h1 className="text-4xl font-bold text-white">
+     <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
         Good Evening 🎧
       </h1>
 
       {/* Trending Songs */}
       <section>
-        <h2 className="text-2xl font-semibold text-white mb-5">
+        <h2 className="text-xl md:text-2xl font-semibold text-white mb-4 md:mb-5">
           Trending Songs
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
           {displaySongs.map((song) => (
             <SongCard
               key={song._id}
@@ -80,11 +80,11 @@ const Home = () => {
 
       {/* Popular Albums */}
       <section>
-        <h2 className="text-2xl font-semibold text-white mb-5">
+        <h2 className="text-xl md:text-2xl font-semibold text-white mb-4 md:mb-5">
           Popular Albums
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
           {albums.map((album) => (
             <AlbumCard
               key={album._id}
@@ -96,11 +96,11 @@ const Home = () => {
 
       {/* Popular Artists */}
       <section>
-        <h2 className="text-2xl font-semibold text-white mb-5">
+       <h2 className="text-xl md:text-2xl font-semibold text-white mb-4 md:mb-5">
           Popular Artists
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
           {artists.map((artist) => (
             <ArtistCard
               key={artist._id}

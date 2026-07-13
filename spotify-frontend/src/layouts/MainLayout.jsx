@@ -33,7 +33,7 @@ const MainLayout = ({ children }) => {
 
           {/* Page content */}
 
-          <div className="flex-1 overflow-y-auto">
+          <div className="flex-1 overflow-y-auto px-2 md:px-0">
 
 
             {children}

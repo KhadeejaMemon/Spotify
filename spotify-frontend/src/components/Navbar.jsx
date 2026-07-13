@@ -134,7 +134,7 @@ const Navbar = () => {
 
       {/* SEARCH */}
 
-      <div className="relative w-[350px]">
+    <div className="relative w-32 sm:w-48 md:w-[350px]">
 
 
         <input
@@ -253,11 +253,7 @@ const Navbar = () => {
 
       {/* RIGHT */}
 
-      <div className="
-        flex
-        gap-3
-        items-center
-      ">
+    <div className="flex gap-2 md:gap-3 items-center">
 
 
         {
@@ -292,8 +288,8 @@ const Navbar = () => {
                   bg-red-500
                   hover:bg-red-600
                   text-white
-                  px-5
-                  py-2
+                  px-3 
+                  md:px-5 py-2 text-sm md:text-base
                   rounded-full
                   font-semibold
                 "
@@ -322,6 +318,7 @@ const Navbar = () => {
                 className="
                   text-gray-300
                   hover:text-white
+                  hidden sm:block 
                 "
 
               >
@@ -340,8 +337,7 @@ const Navbar = () => {
                 className="
                   bg-white
                   text-black
-                  px-4
-                  py-2
+                 px-3 md:px-4 py-2 text-sm md:text-base
                   rounded-full
                 "
 

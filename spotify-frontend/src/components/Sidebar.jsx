@@ -21,16 +21,18 @@ const { user } = useAuth();
 
   return (
 
-    <div className="
-      w-60
+   <div
+  className="
+      w-20
+      md:w-60
       bg-black
-      p-5
-      hidden
-      md:block
+      p-2
+      md:p-5
       border-r
       border-gray-800
       min-h-screen
-    ">
+    "
+>
 
 
       <h1 className="
@@ -81,9 +83,9 @@ const { user } = useAuth();
 
           <FaHome />
 
-          <span>
-            Home
-          </span>
+          <span className="hidden md:inline">
+    Home
+</span>
 
         </Link>
 
@@ -118,7 +120,7 @@ const { user } = useAuth();
 
           <FaSearch />
 
-          <span>
+          <span className="hidden md:inline">
             Search
           </span>
 
@@ -157,7 +159,7 @@ const { user } = useAuth();
 
           <FaList />
 
-          <span>
+          <span className="hidden md:inline">
             Your Library
           </span>
 
@@ -196,7 +198,7 @@ const { user } = useAuth();
 
           <FaHeart />
 
-          <span>
+          <span className="hidden md:inline">
             Liked Songs
           </span>
 
@@ -235,7 +237,7 @@ const { user } = useAuth();
 
           <FaList />
 
-          <span>
+          <span className="hidden md:inline">
             Playlists
           </span>
 
@@ -274,7 +276,7 @@ const { user } = useAuth();
 
           <History size={18}/>
 
-          <span>
+          <span className="hidden md:inline">
             History
           </span>
 
@@ -313,7 +315,7 @@ const { user } = useAuth();
 
           <FaUser />
 
-          <span>
+          <span className="hidden md:inline">
             Profile
           </span>
 
@@ -339,7 +341,7 @@ const { user } = useAuth();
     `}
   >
     <FaTools />
-    <span>Admin Panel</span>
+    <span className="hidden md:inline">Admin Panel</span>
   </Link>
 )}
 
