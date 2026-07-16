@@ -21,22 +21,20 @@ const { user } = useAuth();
 
   return (
 
-   <div
+ <div
 className="
 w-20
 md:w-64
+flex-shrink-0
 bg-[#0d0d0d]
 border-r
 border-gray-800
 min-h-screen
-sticky
-top-0
-overflow-y-auto
+p-3
+md:p-5
 transition-all
 duration-300
 shadow-2xl
-p-3
-md:p-5
 "
 >
 
