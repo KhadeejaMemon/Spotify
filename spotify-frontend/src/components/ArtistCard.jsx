@@ -4,60 +4,73 @@ const ArtistCard = ({ artist }) => {
   const navigate = useNavigate();
 
   return (
-    <div
-      onClick={() => navigate(`/artists/${artist._id}`)}
-      className="
-        group 
-        cursor-pointer 
-        p-3 
-        rounded-lg 
-        hover:bg-[#181818] 
-        transition-all 
-        duration-300
-      "
-    >
+   <div
+  onClick={() => navigate(`/artists/${artist._id}`)}
+  className="
+    group
+    cursor-pointer
+    bg-[#181818]
+    border
+    border-[#262626]
+    p-4
+    rounded-2xl
+    shadow-md
+    hover:bg-[#232323]
+    hover:border-[#3a3a3a]
+    hover:-translate-y-1
+    hover:shadow-2xl
+    transition-all
+    duration-300
+    overflow-hidden
+  "
+>
+     <div className="overflow-hidden rounded-full">
 
-      <div className="overflow-hidden rounded-full">
+  <img
+    src={
+      artist.image
+        ? `https://spotify-backend-gilt.vercel.app${artist.image}`
+        : "/default-artist.png"
+    }
+    alt={artist.name}
+    className="
+      w-full
+      aspect-square
+      object-cover
+      rounded-full
+      transition-all
+      duration-500
+      group-hover:scale-105
+    "
+  />
 
-        <img
-          src={
-            artist.image
-              ? `https://spotify-backend-gilt.vercel.app${artist.image}`
-              : "/default-artist.png"
-          }
-          alt={artist.name}
-          className="
-            w-full 
-            aspect-square 
-            object-cover 
-            rounded-full
-            group-hover:scale-105
-            transition
-            duration-300
-          "
-        />
-
-      </div>
-
-
-      <h2 className="
-        text-white 
-        font-semibold 
-        mt-4 
-        truncate
-      ">
-        {artist.name}
-      </h2>
+</div>
 
 
-      <p className="
-        text-gray-400 
-        text-sm
-        mt-1
-      ">
-        Artist
-      </p>
+    <h2
+  className="
+    mt-4
+    text-base
+    font-bold
+    text-white
+    truncate
+    group-hover:text-green-400
+    transition-all
+    duration-300
+  "
+>
+  {artist.name}
+</h2>
 
+<p
+  className="
+    mt-1
+    text-xs
+    text-gray-400
+  "
+>
+  Artist
+</p>
 
     </div>
   );

@@ -5,26 +5,67 @@ const AlbumCard = ({ album }) => {
 
   return (
     <div
-      onClick={() => navigate(`/albums/${album._id}`)}
-      className="group cursor-pointer rounded-lg p-3 hover:bg-[#1a1a1a] transition-all duration-300"
-    >
-      <div className="overflow-hidden rounded-lg">
+  onClick={() => navigate(`/albums/${album._id}`)}
+  className="
+    group
+    cursor-pointer
+    bg-[#181818]
+    border
+    border-[#262626]
+    p-4
+    rounded-2xl
+    shadow-md
+    hover:bg-[#232323]
+    hover:border-[#3a3a3a]
+    hover:-translate-y-1
+    hover:shadow-2xl
+    transition-all
+    duration-300
+    overflow-hidden
+  "
+>
+  <div className="overflow-hidden rounded-xl">
 
-        <img
-          src={`https://spotify-backend-gilt.vercel.app${album.coverImage}`}
-          alt={album.title}
-          className="w-full aspect-square object-cover group-hover:scale-105 transition duration-300"
-        />
+  <img
+    src={`https://spotify-backend-gilt.vercel.app${album.coverImage}`}
+    alt={album.title}
+    className="
+      w-full
+      aspect-square
+      object-cover
+      rounded-xl
+      transition-all
+      duration-500
+      group-hover:scale-105
+    "
+  />
 
-      </div>
+</div>
+<h2
+  className="
+    mt-4
+    text-base
+    font-bold
+    text-white
+    truncate
+    group-hover:text-green-400
+    transition-all
+    duration-300
+  "
+>
+  {album.title}
+</h2>
 
-      <h2 className="text-white font-semibold mt-3 truncate">
-        {album.title}
-      </h2>
-
-      <p className="text-gray-400 text-sm truncate">
-        Album • {album.artist?.name}
-      </p>
+<p
+  className="
+    mt-1
+    text-xs
+    text-gray-400
+    truncate
+  "
+>
+  Album • {album.artist?.name}
+</p>
     </div>
   );
 };

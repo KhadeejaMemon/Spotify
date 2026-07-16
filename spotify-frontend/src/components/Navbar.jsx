@@ -2,7 +2,10 @@ import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import { useSearch } from "../context/SearchContext";
 import { useAuth } from "../context/AuthContext";
-
+import {
+  FaChevronLeft,
+  FaChevronRight,
+} from "react-icons/fa";
 
 const Navbar = () => {
 
@@ -74,15 +77,19 @@ const Navbar = () => {
   return (
 
     <div className="
-      flex
-      items-center
-      justify-between
-      bg-[#121212]
-      px-6
-      py-4
-      border-b
-      border-gray-800
-    ">
+sticky
+top-0
+z-50
+flex
+items-center
+justify-between
+bg-[#121212]/95
+backdrop-blur-md
+px-4 md:px-6
+py-4
+border-b
+border-gray-800
+">
 
 
 
@@ -91,40 +98,47 @@ const Navbar = () => {
       <div className="flex items-center gap-3">
 
 
-        <button
+       <button
+  onClick={() => navigate(-1)}
+  className="
+    w-10
+    h-10
+    flex
+    items-center
+    justify-center
+    rounded-full
+    bg-[#0f0f0f]
+    hover:bg-[#2a2a2a]
+    transition
+    cursor-pointer
+    hover:scale-105
+active:scale-95
+duration-300
+  "
+>
+  <FaChevronLeft size={17} />
+</button>
 
-          onClick={() => navigate(-1)}
-
-          className="
-            w-8
-            h-8
-            rounded-full
-            bg-black
-            text-white
-          "
-
-        >
-          ←
-        </button>
-
-
-
-        <button
-
-          onClick={() => navigate(1)}
-
-          className="
-            w-8
-            h-8
-            rounded-full
-            bg-black
-            text-white
-          "
-
-        >
-          →
-        </button>
-
+<button
+  onClick={() => navigate(1)}
+  className="
+    w-10
+    h-10
+    flex
+    items-center
+    justify-center
+    rounded-full
+    bg-[#0f0f0f]
+    hover:bg-[#2a2a2a]
+    transition
+    cursor-pointer
+    hover:scale-105
+active:scale-95
+duration-300
+  "
+>
+  <FaChevronRight size={17} />
+</button>
 
       </div>
 
@@ -134,8 +148,7 @@ const Navbar = () => {
 
       {/* SEARCH */}
 
-    <div className="relative w-32 sm:w-48 md:w-[350px]">
-
+  <div className="relative w-44 sm:w-64 md:w-[360px]">
 
         <input
 
@@ -147,87 +160,82 @@ const Navbar = () => {
 
           placeholder="Search songs..."
 
-          className="
-            w-full
-            rounded-full
-            bg-[#242424]
-            px-4
-            py-2
-            text-white
-            outline-none
-          "
-
+   className="
+w-full
+rounded-full
+bg-[#242424]
+px-5
+py-2.5
+text-white
+outline-none
+border
+border-transparent
+focus:border-green-500
+hover:bg-[#2c2c2c]
+shadow-md
+transition-all
+duration-300
+placeholder:text-gray-400
+"
         />
 
 
 
 
 
-        {
-          searchResults.length > 0 && (
+      {searchResults.length > 0 && (
 
-            <div className="
-              absolute
-              left-0
-              right-0
-              mt-2
-              rounded-lg
-              bg-[#181818]
-              shadow-lg
-              z-50
-            ">
-
+  <div
+ className="
+absolute
+top-full
+left-0
+right-0
+mt-2
+bg-[#181818]
+rounded-xl
+shadow-2xl
+border
+border-gray-700
+overflow-hidden
+z-50
+animate-in
+fade-in
+zoom-in-95
+duration-200
+"
+  >
 
               {
                 searchResults.map((song)=>(
 
 
-                  <div
+                 <div
+  key={song._id}
+  onClick={() => {
+    setSelectedSong(song);
+    setSearchQuery(song.title);
+    setSearchResults([]);
+  }}
+  className="
+    cursor-pointer
+    px-4
+    py-3
+   hover:bg-[#282828]
+hover:pl-6
+transition-all
+duration-300
+   
+  "
+>
+  <p className="text-white font-medium">
+    {song.title}
+  </p>
 
-                    key={song._id}
-
-                    className="
-                      cursor-pointer
-                      p-3
-                      hover:bg-[#282828]
-                    "
-
-
-                    onClick={() => {
-
-                      setSelectedSong(song);
-
-                      setSearchQuery(song.title);
-
-                      setSearchResults([song]);
-
-                    }}
-
-                  >
-
-
-                    <p className="
-                      text-white
-                      font-semibold
-                    ">
-
-                      {song.title}
-
-                    </p>
-
-
-
-                    <p className="
-                      text-sm
-                      text-gray-400
-                    ">
-
-                      {song.artist?.name}
-
-                    </p>
-
-
-                  </div>
+  <p className="text-sm text-gray-400">
+    {song.artist?.name}
+  </p>
+</div>
 
 
                 ))
@@ -253,7 +261,7 @@ const Navbar = () => {
 
       {/* RIGHT */}
 
-    <div className="flex gap-2 md:gap-3 items-center">
+   <div className="flex items-center gap-3 shrink-0">
 
 
         {
@@ -266,10 +274,18 @@ const Navbar = () => {
 
                 onClick={() => navigate("/profile")}
 
-                className="
-                  text-gray-300
-                  hover:text-white
-                "
+               className="
+px-5
+font-medium
+py-2
+rounded-full
+text-gray-300
+hover:text-white
+hover:bg-[#2a2a2a]
+transition-all
+duration-300
+cursor-pointer
+"
 
               >
 
@@ -285,14 +301,21 @@ const Navbar = () => {
                 onClick={handleLogout}
 
                 className="
-                  bg-red-500
-                  hover:bg-red-600
-                  text-white
-                  px-3 
-                  md:px-5 py-2 text-sm md:text-base
-                  rounded-full
-                  font-semibold
-                "
+bg-red-500
+hover:bg-red-600
+hover:scale-105
+active:scale-95
+hover:shadow-red-500/30
+transition-all
+duration-300
+text-white
+px-5
+py-2
+rounded-full
+font-semibold
+cursor-pointer
+shadow-lg
+"
 
               >
 
@@ -316,10 +339,17 @@ const Navbar = () => {
                 onClick={() => navigate("/login")}
 
                 className="
-                  text-gray-300
-                  hover:text-white
-                  hidden sm:block 
-                "
+px-5
+font-medium
+  py-2
+  rounded-full
+  text-gray-300
+  hover:text-white
+  hover:bg-[#2a2a2a]
+  transition-all
+  duration-300
+  cursor-pointer
+"
 
               >
 
@@ -333,13 +363,23 @@ const Navbar = () => {
               <button
 
                 onClick={() => navigate("/register")}
+className="
+bg-white
+text-black
+px-6
+py-2
+rounded-full
+font-semibold
+shadow-lg
+hover:shadow-white/20
+hover:scale-105
+active:scale-95
+transition-all
+duration-300
+cursor-pointer
 
-                className="
-                  bg-white
-                  text-black
-                 px-3 md:px-4 py-2 text-sm md:text-base
-                  rounded-full
-                "
+
+"
 
               >
 

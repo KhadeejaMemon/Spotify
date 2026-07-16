@@ -28,15 +28,24 @@ const image =
   return (
 
     <div
-      className="
-        relative
-        group
-        cursor-pointer
-        rounded-xl
-        p-3
-        transition
-        hover:bg-[#181818]
-      "
+     className="
+relative
+group
+cursor-pointer
+bg-[#181818]
+border
+border-[#262626]
+rounded-2xl
+p-4
+shadow-md
+hover:bg-[#232323]
+hover:border-[#3a3a3a]
+hover:-translate-y-1
+hover:shadow-2xl
+transition-all
+duration-300
+overflow-hidden
+"
     >
 
 
@@ -107,15 +116,15 @@ const image =
             src={image}
 
             alt={playlist.name}
-
-            className="
-              w-full
-              h-full
-              object-cover
-              group-hover:scale-105
-              transition
-              duration-300
-            "
+className="
+w-full
+h-full
+object-cover
+rounded-xl
+transition-all
+duration-500
+group-hover:scale-105
+"
 
           />
 
@@ -124,51 +133,41 @@ const image =
 
 
 
+<h2
+className="
+mt-4
+text-base
+font-bold
+text-white
+truncate
+group-hover:text-green-400
+transition-all
+duration-300
+"
+>
+{playlist.name}
+</h2>
 
-        <h2
-          className="
-            text-white
-            font-semibold
-            mt-3
-            truncate
-          "
-        >
+<p
+className="
+mt-1
+text-xs
+text-gray-400
+truncate
+"
+>
+{playlist.description || "Playlist"}
+</p>
 
-          {playlist.name}
-
-        </h2>
-
-
-
-
-
-        <p
-          className="
-            text-gray-400
-            text-sm
-            truncate
-          "
-        >
-
-          {playlist.description || "Playlist"}
-
-        </p>
-
-
-
-
-
-        <p
-          className="
-            text-gray-500
-            text-xs
-            mt-2
-          "
-        >
-
-          {playlist.songs?.length || 0} songs
-
-        </p>
+<p
+className="
+mt-2
+text-xs
+text-gray-500
+"
+>
+🎵 {playlist.songs?.length || 0} Songs
+</p>
 
 
 

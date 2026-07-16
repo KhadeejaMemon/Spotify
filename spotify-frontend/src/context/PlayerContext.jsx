@@ -10,7 +10,7 @@ export const PlayerProvider = ({ children }) => {
   const [currentSong, setCurrentSong] = useState(null);
   const [playlist, setPlaylist] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(-1);
-
+const [loading,setLoading]=useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const [currentTime, setCurrentTime] = useState(0);
@@ -34,10 +34,9 @@ const playSong = async (song, songs = playlist) => {
 
   if (!song?.audio) return;
 
+  setLoading(true);
 
-  // Save History
   await addToHistory(song._id);
-
 
   if (songs.length > 0) {
     setPlaylist(songs);
@@ -51,19 +50,14 @@ const playSong = async (song, songs = playlist) => {
     }
   }
 
-
   setCurrentSong(song);
-
 
   audioRef.current.src =
     `https://spotify-backend-gilt.vercel.app${song.audio}`;
 
-
   audioRef.current.play();
 
-
   setIsPlaying(true);
-
 };
   // ================= PAUSE =================
 
@@ -90,6 +84,13 @@ const playSong = async (song, songs = playlist) => {
     isPlaying ? pauseSong() : resumeSong();
   };
 
+  const handleCanPlay = () => {
+  setLoading(false);
+};
+
+const handleWaiting = () => {
+  setLoading(true);
+};
   // ================= NEXT =================
 
   const nextSong = () => {
@@ -133,55 +134,62 @@ const playSong = async (song, songs = playlist) => {
   // ================= EVENTS =================
 
   useEffect(() => {
-    const audio = audioRef.current;
+  const audio = audioRef.current;
 
-    const handleTimeUpdate = () => {
-      setCurrentTime(audio.currentTime);
-      setDuration(audio.duration || 0);
-    };
+  const handleTimeUpdate = () => {
+    setCurrentTime(audio.currentTime);
+    setDuration(audio.duration || 0);
+  };
 
-    const handleEnded = () => {
-      nextSong();
-    };
+  const handleEnded = () => {
+    nextSong();
+  };
 
-    audio.addEventListener("timeupdate", handleTimeUpdate);
-    audio.addEventListener("ended", handleEnded);
+  audio.addEventListener("timeupdate", handleTimeUpdate);
+  audio.addEventListener("ended", handleEnded);
 
-    return () => {
-      audio.removeEventListener("timeupdate", handleTimeUpdate);
-      audio.removeEventListener("ended", handleEnded);
-    };
-  }, [currentIndex, playlist]);
+  audio.addEventListener("canplay", handleCanPlay);
+  audio.addEventListener("waiting", handleWaiting);
+
+  return () => {
+    audio.removeEventListener("timeupdate", handleTimeUpdate);
+    audio.removeEventListener("ended", handleEnded);
+
+    audio.removeEventListener("canplay", handleCanPlay);
+    audio.removeEventListener("waiting", handleWaiting);
+  };
+}, [currentIndex, playlist]);
 
   return (
     <PlayerContext.Provider
-      value={{
-        audioRef,
+     value={{
+  audioRef,
 
-        currentSong,
-        playlist,
-        currentIndex,
+  currentSong,
+  playlist,
+  currentIndex,
 
-        isPlaying,
+  isPlaying,
+  loading,
 
-        currentTime,
-        duration,
+  currentTime,
+  duration,
 
-        volume,
+  volume,
 
-        playSong,
-        pauseSong,
-        resumeSong,
-        togglePlay,
+  playSong,
+  pauseSong,
+  resumeSong,
+  togglePlay,
 
-        nextSong,
-        previousSong,
+  nextSong,
+  previousSong,
 
-        seekSong,
-        changeVolume,
+  seekSong,
+  changeVolume,
 
-        setPlaylist,
-      }}
+  setPlaylist,
+}}
     >
       {children}
     </PlayerContext.Provider>

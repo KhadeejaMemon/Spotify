@@ -22,28 +22,59 @@ const { user } = useAuth();
   return (
 
    <div
-  className="
-      w-20
-      md:w-60
-      bg-black
-      p-2
-      md:p-5
-      border-r
-      border-gray-800
-      min-h-screen
-    "
+className="
+w-20
+md:w-64
+bg-[#0d0d0d]
+border-r
+border-gray-800
+min-h-screen
+sticky
+top-0
+overflow-y-auto
+transition-all
+duration-300
+shadow-2xl
+p-3
+md:p-5
+"
 >
 
+<h1
+className="
+hidden
+md:flex
+items-center
+gap-3
+mb-8
+text-3xl
+font-bold
+tracking-wide
+text-white
+select-none
+"
+>
 
-      <h1 className="
-        text-2xl
-        font-bold
-        mb-6
-        text-white
-      ">
-        🎵 Spotify
-      </h1>
+<span
+className="
+text-green-500
+text-4xl
+"
+>
+🎵
+</span>
 
+<span
+className="
+hover:text-green-500
+transition-all
+duration-300
+"
+>
+Spotify
+</span>
+
+</h1>
 
 
 
@@ -69,12 +100,15 @@ const { user } = useAuth();
             px-4
             py-3
             rounded-lg
-            transition
+           transition-all
+duration-300
+cursor-pointer
+hover:translate-x-1
 
             ${
               location.pathname === "/"
-              ? "bg-[#282828] text-white"
-              : "hover:text-white hover:bg-[#1f1f1f]"
+              ? "bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg"
+              : "hover:text-white hover:bg-[#1d1d1d] hover:shadow-md"
             }
 
           `}
@@ -106,12 +140,15 @@ const { user } = useAuth();
             px-4
             py-3
             rounded-lg
-            transition
+            transition-all
+duration-300
+cursor-pointer
+hover:translate-x-1
 
             ${
               location.pathname === "/search"
-              ? "bg-[#282828] text-white"
-              : "hover:text-white hover:bg-[#1f1f1f]"
+              ? "bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg"
+              : "hover:text-white hover:bg-[#1d1d1d] hover:shadow-md"
             }
 
           `}
@@ -145,12 +182,15 @@ const { user } = useAuth();
             px-4
             py-3
             rounded-lg
-            transition
+          transition-all
+duration-300
+cursor-pointer
+hover:translate-x-1
 
             ${
               location.pathname === "/library"
-              ? "bg-[#282828] text-white"
-              : "hover:text-white hover:bg-[#1f1f1f]"
+            ? "bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg"
+              : "hover:text-white hover:bg-[#1d1d1d] hover:shadow-md"
             }
 
           `}
@@ -184,12 +224,15 @@ const { user } = useAuth();
             px-4
             py-3
             rounded-lg
-            transition
+          transition-all
+duration-300
+cursor-pointer
+hover:translate-x-1
 
             ${
               location.pathname === "/liked"
-              ? "bg-[#282828] text-white"
-              : "hover:text-white hover:bg-[#1f1f1f]"
+              ? "bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg"
+              : "hover:text-white hover:bg-[#1d1d1d] hover:shadow-md"
             }
 
           `}
@@ -223,12 +266,15 @@ const { user } = useAuth();
             px-4
             py-3
             rounded-lg
-            transition
+           transition-all
+duration-300
+cursor-pointer
+hover:translate-x-1
 
             ${
               location.pathname === "/playlists"
-              ? "bg-[#282828] text-white"
-              : "hover:text-white hover:bg-[#1f1f1f]"
+              ? "bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg"
+              : "hover:text-white hover:bg-[#1d1d1d] hover:shadow-md"
             }
 
           `}
@@ -262,12 +308,15 @@ const { user } = useAuth();
             px-4
             py-3
             rounded-lg
-            transition
+            transition-all
+duration-300
+cursor-pointer
+hover:translate-x-1
 
             ${
               location.pathname === "/history"
-              ? "bg-[#282828] text-white"
-              : "hover:text-white hover:bg-[#1f1f1f]"
+             ? "bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg"
+              : "hover:text-white hover:bg-[#1d1d1d] hover:shadow-md"
             }
 
           `}
@@ -301,12 +350,15 @@ const { user } = useAuth();
             px-4
             py-3
             rounded-lg
-            transition
+            transition-all
+duration-300
+cursor-pointer
+hover:translate-x-1
 
             ${
               location.pathname === "/profile"
-              ? "bg-[#282828] text-white"
-              : "hover:text-white hover:bg-[#1f1f1f]"
+              ? "bg-gradient-to-r from-green-600 to-green-500 text-white shadow-lg"
+              : "hover:text-white hover:bg-[#1d1d1d] hover:shadow-md"
             }
 
           `}
@@ -332,7 +384,10 @@ const { user } = useAuth();
       px-4
       py-3
       rounded-lg
-      transition
+      transition-all
+duration-300
+cursor-pointer
+hover:translate-x-1
       ${
         location.pathname.startsWith("/admin")
           ? "bg-green-600 text-white"

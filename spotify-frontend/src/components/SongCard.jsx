@@ -133,194 +133,188 @@ const SongCard = ({ song, songs }) => {
 
     <>
 
-      <div className="
-        group
-        cursor-pointer
-        rounded-lg
-        p-3
-        hover:bg-[#1a1a1a]
-        transition-all
-        duration-300
-      ">
+     <div
+className="
+group
+relative
+cursor-pointer
+rounded-2xl
+bg-[#181818]
+p-4
+hover:bg-[#232323]
+hover:-translate-y-1
+shadow-md
+hover:shadow-2xl
+transition-all
+duration-300
+overflow-hidden
+will-change-transform
+"
+>
 
 
         {/* IMAGE */}
 
-        <div className="relative">
+       <div className="relative overflow-hidden rounded-xl">
 
+<img
+src={`https://spotify-backend-gilt.vercel.app${song.thumbnail}`}
+alt={song.title}
+className="
+w-full
+aspect-square
+object-cover
+rounded-xl
+transition-all
+duration-500
+group-hover:scale-105
+"
+/>
 
-          <img
-            src={`https://spotify-backend-gilt.vercel.app${song.thumbnail}`}
-            alt={song.title}
+<button
+onClick={() => playSong(song, songs)}
+className="
+absolute
+bottom-4
+right-4
+w-10
+h-10
+rounded-full
+bg-green-500
+text-black
+font-bold
+flex
+items-center
+justify-center
+opacity-0
+translate-y-4
+group-hover:opacity-100
+group-hover:translate-y-0
+transition-all
+duration-300
+shadow-xl
+hover:scale-110
+active:scale-95
+"
+>
+▶
+</button>
 
-            className="
-              w-full
-              aspect-square
-              object-cover
-              rounded-md
-            "
-
-          />
-
-
-
-          {/* PLAY BUTTON */}
-
-          <button
-
-            onClick={() => playSong(song, songs)}
-
-            className="
-              absolute
-              bottom-2
-              right-2
-              bg-green-500
-              text-black
-              p-3
-              rounded-full
-              opacity-0
-              group-hover:opacity-100
-              transition
-            "
-
-          >
-
-            ▶
-
-          </button>
-
-
-        </div>
-
+</div>
 
 
 
 
         {/* TITLE */}
 
-        <h3 className="
-          text-white
-          mt-3
-          font-semibold
-        ">
+       <h3
+className="
+mt-4
+text-white
+font-bold
+text-base
+truncate
+group-hover:text-green-400
+transition-all
+duration-300
+"
+>
+{song.title}
+</h3>
 
-          {song.title}
-
-        </h3>
-
-
-
-
-
-        {/* ARTIST */}
-
-        <p className="
-          text-gray-400
-          text-sm
-        ">
-
-          {song.artist?.name}
-
-        </p>
-
+<p
+className="
+mt-1
+text-sm
+text-gray-400
+truncate
+"
+>
+{song.artist?.name}
+</p>
 
 
 
 
         {/* ACTIONS */}
 
-        <div className="
-          flex
-          items-center
-          justify-between
-          mt-4
-        ">
+     <div
+className="
+flex
+items-center
+justify-between
+mt-5
+"
+>
 
+<button
 
+onClick={
+liked
+? handleUnlike
+: handleLike
+}
 
-          {/* LIKE BUTTON */}
+className={`
+px-4
+py-2
+rounded-full
+text-sm
+font-medium
+transition-all
+duration-300
+hover:scale-105
+active:scale-95
 
+${
+liked
+? "bg-red-500 text-white shadow-lg"
+: "bg-[#2c2c2c] text-white hover:bg-red-500"
+}
+`}
+>
 
-          <button
+{liked ? "❤️ Liked" : "🤍 Like"}
 
-            onClick={
-              liked 
-              ? handleUnlike 
-              : handleLike
-            }
+</button>
 
-            className={`
+<button
 
-              text-sm
-              px-3
-              py-1
-              rounded-full
-              transition
+onClick={() => {
 
-              ${
-                liked
-                ? "bg-red-500 text-white"
-                : "bg-gray-700 text-white hover:bg-red-500"
-              }
+if (!user) {
 
-            `}
+alert("Please login first to add songs to playlist");
 
-          >
+return;
 
-            {
-              liked
-              ? "❤️ Liked"
-              : "🤍 Like"
-            }
+}
 
+setOpenModal(true);
 
-          </button>
+}}
 
+className="
+w-10
+h-10
+rounded-full
+flex
+items-center
+justify-center
+text-gray-300
+hover:text-green-500
+hover:bg-[#2d2d2d]
+transition-all
+duration-300
+hover:rotate-90
+"
+>
 
+<MoreVertical size={20}/>
 
+</button>
 
-
-
-          {/* ADD PLAYLIST BUTTON */}
-
-
-          <button
-
-            onClick={() => {
-
-
-              if(!user){
-
-                alert("Please login first to add songs to playlist");
-
-                return;
-
-              }
-
-
-              setOpenModal(true);
-
-
-            }}
-
-
-            className="
-              text-gray-300
-              hover:text-green-500
-              transition
-            "
-
-          >
-
-            <MoreVertical size={22}/>
-
-
-          </button>
-
-
-
-        </div>
-
+</div>
 
 
       </div>
