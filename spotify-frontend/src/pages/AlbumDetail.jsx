@@ -60,14 +60,32 @@ const { playSong } = usePlayer();
 
       <div className="bg-gradient-to-b from-[#4d2d8b] via-[#2b1748] to-[#121212]">
 
-        <div className="flex flex-col md:flex-row items-center md:items-end gap-8 p-10">
-
+      <div className="
+flex
+flex-col
+md:flex-row
+items-center
+md:items-end
+gap-6
+p-5
+md:p-10
+">
           {/* Album Image */}
 
           <img
             src={`https://spotify-backend-gilt.vercel.app${album.coverImage}`}
             alt={album.title}
-            className="w-64 h-64 rounded-lg shadow-2xl object-cover"
+           className="
+w-48
+h-48
+sm:w-56
+sm:h-56
+md:w-64
+md:h-64
+rounded-xl
+shadow-2xl
+object-cover
+"
           />
 
           {/* Album Info */}
@@ -78,7 +96,13 @@ const { playSong } = usePlayer();
               Album
             </p>
 
-            <h1 className="text-5xl md:text-7xl font-black mt-3">
+            <h1 className="
+text-3xl
+sm:text-5xl
+md:text-7xl
+font-black
+mt-3
+">
               {album.title}
             </h1>
 
@@ -118,7 +142,7 @@ const { playSong } = usePlayer();
 
       {/* Songs Section */}
 
-      <div className="px-10 py-8">
+      <div className="px-4 md:px-10 py-8">
 
         <h2 className="text-2xl font-bold mb-6">
           Songs
@@ -132,15 +156,35 @@ const { playSong } = usePlayer();
           <div className="space-y-2">
 
             {songs.map((song, index) => (
-              <div
-                key={song._id}
-                className="flex items-center justify-between px-4 py-3 rounded-lg hover:bg-[#1d1d1d] transition"
-              >
+             <div
+  key={song._id}
+  onClick={() => playSong(song, songs)}
+  className="
+    flex
+    items-center
+    justify-between
+    px-4
+    py-3
+    rounded-lg
+    hover:bg-[#1d1d1d]
+    transition
+    cursor-pointer
+    group
+  "
+>
                 <div className="flex items-center gap-4">
 
-                  <span className="text-gray-400 w-6">
-                    {index + 1}
-                  </span>
+                 <div className="w-6 flex justify-center">
+  <span className="group-hover:hidden text-gray-400">
+    {index + 1}
+  </span>
+
+  <Play
+    size={16}
+    fill="white"
+    className="hidden group-hover:block"
+  />
+</div>
 
                   <img
                     src={`https://spotify-backend-gilt.vercel.app${song.thumbnail}`}
@@ -162,9 +206,9 @@ const { playSong } = usePlayer();
 
                 </div>
 
-                <span className="text-gray-400">
-                  {song.duration}s
-                </span>
+               <span className="text-gray-400 text-sm">
+  {formatTime(song.duration)}
+</span>
 
               </div>
             ))}
