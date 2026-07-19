@@ -120,22 +120,28 @@ const ArtistDetail = () => {
       {/* Artist Header */}
 
 
-      <div className="
-        bg-gradient-to-b
-        from-[#3b3b3b]
-        to-[#121212]
-        p-10
-      ">
+      <div
+  className="
+    bg-gradient-to-b
+    from-[#3b3b3b]
+    via-[#232323]
+    to-[#121212]
+    px-5
+    py-8
+    md:p-10
+  "
+>
 
 
         <div className="
-          flex
-          flex-col
-          md:flex-row
-          items-center
-          md:items-end
-          gap-8
-        ">
+flex
+flex-col
+md:flex-row
+items-center
+md:items-end
+gap-6
+md:gap-8
+">
 
 
           <img
@@ -144,14 +150,20 @@ const ArtistDetail = () => {
 
             alt={artist.name}
 
-            className="
-              w-64
-              h-64
-              rounded-full
-              object-cover
-              shadow-2xl
-            "
-
+          className="
+w-44
+h-44
+sm:w-56
+sm:h-56
+md:w-64
+md:h-64
+rounded-full
+object-cover
+shadow-2xl
+transition-all
+duration-300
+hover:scale-105
+"
           />
 
 
@@ -173,11 +185,12 @@ const ArtistDetail = () => {
 
 
             <h1 className="
-              text-5xl
-              md:text-7xl
-              font-black
-              mt-3
-            ">
+text-3xl
+sm:text-5xl
+md:text-7xl
+font-black
+mt-3
+">
 
               {artist.name}
 
@@ -186,9 +199,11 @@ const ArtistDetail = () => {
 
 
             <p className="
-              text-gray-400
-              mt-4
-            ">
+text-gray-300
+mt-4
+max-w-2xl
+leading-7
+">
 
               {artist.bio}
 
@@ -212,18 +227,21 @@ const ArtistDetail = () => {
               onClick={()=>playSong(songs[0],songs)}
 
               className="
-                mt-6
-                bg-green-500
-                text-black
-                w-14
-                h-14
-                rounded-full
-                flex
-                items-center
-                justify-center
-                hover:scale-105
-                transition
-              "
+mt-6
+w-14
+h-14
+rounded-full
+bg-green-500
+text-black
+flex
+items-center
+justify-center
+shadow-xl
+hover:scale-110
+active:scale-95
+transition-all
+duration-300
+"
 
             >
 
@@ -249,7 +267,7 @@ const ArtistDetail = () => {
 
 
 
-      <div className="p-10">
+     <div className="px-4 md:px-10 py-8">
 
 
         <h2 className="
@@ -278,16 +296,21 @@ const ArtistDetail = () => {
 
                 onClick={()=>playSong(song,songs)}
 
-                className="
-                  flex
-                  items-center
-                  justify-between
-                  p-4
-                  rounded-lg
-                  hover:bg-[#1f1f1f]
-                  cursor-pointer
-                  group
-                "
+             className="
+flex
+items-center
+justify-between
+gap-3
+px-3
+md:px-4
+py-3
+rounded-xl
+hover:bg-[#1d1d1d]
+transition-all
+duration-300
+cursor-pointer
+group
+"
 
               >
 
@@ -299,11 +322,17 @@ const ArtistDetail = () => {
                 ">
 
 
-                  <span className="text-gray-400">
+                  <div className="w-6 flex justify-center">
+    <span className="group-hover:hidden text-gray-400">
+        {index + 1}
+    </span>
 
-                    {index+1}
-
-                  </span>
+    <Play
+        size={16}
+        fill="white"
+        className="hidden group-hover:block"
+    />
+</div>
 
 
 
@@ -351,18 +380,16 @@ const ArtistDetail = () => {
                 <div className="flex gap-4 items-center">
 
 
-                  <Play
+                 <Play
+size={18}
+fill="white"
+className="
+opacity-0
+group-hover:opacity-100
+"
+/>
 
-                    size={18}
-
-                    fill="white"
-
-                    className="
-                      opacity-0
-                      group-hover:opacity-100
-                    "
-
-                  />
+                
 
 
 
@@ -398,7 +425,7 @@ const ArtistDetail = () => {
 
 
 
-      <div className="px-10 pb-10">
+     <div className="px-4 md:px-10 pb-10">
 
 
         <h2 className="
@@ -414,12 +441,15 @@ const ArtistDetail = () => {
 
 
         <div className="
-          grid
-          grid-cols-2
-          md:grid-cols-4
-          lg:grid-cols-6
-          gap-5
-        ">
+grid
+grid-cols-2
+sm:grid-cols-3
+md:grid-cols-4
+lg:grid-cols-5
+xl:grid-cols-6
+gap-4
+md:gap-6
+">
 
 
           {
