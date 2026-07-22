@@ -119,7 +119,7 @@ const AIRecommendations = () => {
           </h2>
 
           <p className="text-gray-400 mt-3">
-            Listen to some songs first.
+            Listen  some songs first.
           </p>
 
         </div>
