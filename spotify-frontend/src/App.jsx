@@ -39,6 +39,8 @@ import AddAlbum from "./pages/AddAlbum";
 import EditAlbum from "./pages/EditAlbum";
 import AddArtist from "./pages/AddArtist";
 import EditArtist from "./pages/EditArtist";
+
+import AIRecommendations from "./pages/AIRecommendations";
 function App() {
 
   return (
@@ -226,6 +228,17 @@ function App() {
  }
 />
 
+
+<Route
+  path="/ai"
+  element={
+    <ProtectedRoute>
+      <MainLayout>
+        <AIRecommendations />
+      </MainLayout>
+    </ProtectedRoute>
+  }
+/>
 <Route
   path="/admin"
   element={

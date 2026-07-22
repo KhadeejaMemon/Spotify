@@ -17,6 +17,7 @@ const userRoutes = require("./routes/userRoutes");
 const searchRoutes = require("./routes/searchRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const historyRoutes = require("./routes/historyRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
 const errorHandler = require("./middleware/errorMiddleware");
 
@@ -76,7 +77,7 @@ app.use("/api/admin", adminRoutes);
 
 app.use("/api/history", historyRoutes);
 
-
+app.use("/api/ai", aiRoutes);
 
 // Test
 

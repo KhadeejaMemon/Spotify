@@ -4,16 +4,31 @@ import SongCard from "../components/SongCard";
 import AlbumCard from "../components/AlbumCard";
 import ArtistCard from "../components/ArtistCard";
 import { useSearch } from "../context/SearchContext";
-
+import { getRecommendations } from "../services/aiService";
+import { useAuth } from "../context/AuthContext";
 const Home = () => {
 
   const [songs, setSongs] = useState([]);
   const [albums, setAlbums] = useState([]);
   const [artists, setArtists] = useState([]);
   const [loading, setLoading] = useState(true);
+const { user } = useAuth();
 
+const [recommendations, setRecommendations] = useState([]);
   const { selectedSong } = useSearch();
+const fetchRecommendations = async () => {
+  if (!user) return;
 
+  try {
+    const res = await getRecommendations();
+
+    if (res.success) {
+      setRecommendations(res.recommendations);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
   const fetchData = async () => {
     try {
 
@@ -45,12 +60,13 @@ const Home = () => {
 
     }
   };
+useEffect(() => {
+  fetchData();
 
-  useEffect(() => {
-
-    fetchData();
-
-  }, []);
+  if (user) {
+    fetchRecommendations();
+  }
+}, [user]);
 
   const displaySongs = selectedSong ? [selectedSong] : songs;
 
@@ -131,6 +147,9 @@ Discover new music, artists and albums.
 </p>
 
 </div>{/* Trending Songs */}
+
+
+
 
 <section className="space-y-5">
 

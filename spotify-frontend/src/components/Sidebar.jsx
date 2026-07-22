@@ -7,6 +7,7 @@ import {
   FaList,
   FaUser,
 } from "react-icons/fa";
+import { Sparkles } from "lucide-react";
 import { FaTools } from "react-icons/fa";
 import { useAuth } from "../context/AuthContext";
 
@@ -371,6 +372,33 @@ hover:translate-x-1
 
         </Link>
 
+
+<Link
+  to="/ai"
+  className={`
+    flex
+    items-center
+    gap-3
+    px-4
+    py-3
+    rounded-lg
+    transition-all
+    duration-300
+    hover:translate-x-1
+
+    ${
+      location.pathname === "/ai"
+        ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white shadow-lg"
+        : "hover:text-white hover:bg-[#1d1d1d]"
+    }
+  `}
+>
+  <Sparkles size={18} />
+
+  <span className="hidden md:inline">
+    AI For You
+  </span>
+</Link>
 
 {user?.role === "admin" && (
   <Link
