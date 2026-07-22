@@ -18,6 +18,7 @@ const searchRoutes = require("./routes/searchRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const historyRoutes = require("./routes/historyRoutes");
 const aiRoutes = require("./routes/aiRoutes");
+const spotifyRoutes = require("./routes/spotifyRoutes");
 
 const errorHandler = require("./middleware/errorMiddleware");
 
@@ -78,6 +79,8 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/history", historyRoutes);
 
 app.use("/api/ai", aiRoutes);
+
+app.use("/api/spotify", spotifyRoutes);
 
 // Test
 

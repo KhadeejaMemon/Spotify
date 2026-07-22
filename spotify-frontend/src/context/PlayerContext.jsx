@@ -30,34 +30,109 @@ const addToHistory = async (songId) => {
 };
   // ================= PLAY SONG =================
 // ================= PLAY SONG =================
+// const playSong = async (song, songs = playlist) => {
+
+//   if (!song?.audio) return;
+
+//   setLoading(true);
+
+//   await addToHistory(song._id);
+
+//   if (songs.length > 0) {
+//     setPlaylist(songs);
+
+//     const index = songs.findIndex(
+//       (s) => s._id === song._id
+//     );
+
+//     if (index !== -1) {
+//       setCurrentIndex(index);
+//     }
+//   }
+
+//   setCurrentSong(song);
+
+//   audioRef.current.src =
+//     `https://spotify-backend-gilt.vercel.app${song.audio}`;
+
+//   audioRef.current.play();
+
+//   setIsPlaying(true);
+// };
+
 const playSong = async (song, songs = playlist) => {
 
-  if (!song?.audio) return;
+  if (!song) return;
+
 
   setLoading(true);
 
-  await addToHistory(song._id);
+
+  // History only for database songs
+  if(song._id && !song.isSpotify){
+    await addToHistory(song._id);
+  }
+
+
 
   if (songs.length > 0) {
+
     setPlaylist(songs);
 
+
     const index = songs.findIndex(
-      (s) => s._id === song._id
+      (s)=>s._id === song._id
     );
 
-    if (index !== -1) {
+
+    if(index !== -1){
       setCurrentIndex(index);
     }
+
   }
+
+
 
   setCurrentSong(song);
 
-  audioRef.current.src =
+
+
+  let audioUrl;
+
+
+
+  // Spotify API song
+
+  if(song.isSpotify){
+
+    audioUrl = song.previewUrl;
+
+  }
+
+
+  // MongoDB song
+
+  else{
+
+    audioUrl =
     `https://spotify-backend-gilt.vercel.app${song.audio}`;
 
-  audioRef.current.play();
+  }
+
+
+
+  audioRef.current.src = audioUrl;
+
+
+  audioRef.current.load();
+
+
+  await audioRef.current.play();
+
 
   setIsPlaying(true);
+
+
 };
   // ================= PAUSE =================
 

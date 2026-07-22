@@ -18,10 +18,10 @@ const SongCard = ({ song, songs }) => {
 
 
 
-  // Check liked song only if user is logged in
+  // Check liked only for database songs
   const checkLiked = async () => {
 
-    if (!user) return;
+    if (!user || song.isSpotify) return;
 
 
     try {
@@ -53,7 +53,7 @@ const SongCard = ({ song, songs }) => {
 
   useEffect(() => {
 
-    if(user){
+    if(user && !song.isSpotify){
 
       checkLiked();
 
@@ -63,8 +63,34 @@ const SongCard = ({ song, songs }) => {
 
     }
 
-  }, [user]);
+  }, [user, song._id]);
 
+
+
+
+  // Play Song
+
+  const handlePlay = () => {
+
+
+    if(song.isSpotify){
+
+      playSong(
+        {
+          ...song,
+          audio: song.previewUrl,
+        },
+        songs
+      );
+
+
+    }else{
+
+      playSong(song, songs);
+
+    }
+
+  };
 
 
 
@@ -77,6 +103,13 @@ const SongCard = ({ song, songs }) => {
     if(!user){
 
       alert("Please login first to like songs");
+
+      return;
+
+    }
+
+
+    if(song.isSpotify){
 
       return;
 
@@ -108,6 +141,13 @@ const SongCard = ({ song, songs }) => {
   const handleUnlike = async () => {
 
 
+    if(song.isSpotify){
+
+      return;
+
+    }
+
+
     try {
 
 
@@ -125,15 +165,11 @@ const SongCard = ({ song, songs }) => {
 
   };
 
-
-
-
-
   return (
 
-    <>
+<>
 
-     <div
+<div
 className="
 group
 relative
@@ -153,13 +189,21 @@ will-change-transform
 >
 
 
-        {/* IMAGE */}
+{/* IMAGE */}
 
-       <div className="relative overflow-hidden rounded-xl">
+<div className="relative overflow-hidden rounded-xl">
+
 
 <img
-src={`https://spotify-backend-gilt.vercel.app${song.thumbnail}`}
+
+src={
+song.isSpotify
+? song.thumbnail
+: `https://spotify-backend-gilt.vercel.app${song.thumbnail}`
+}
+
 alt={song.title}
+
 className="
 w-full
 aspect-square
@@ -169,10 +213,15 @@ transition-all
 duration-500
 group-hover:scale-105
 "
+
 />
 
+
+
 <button
-onClick={() => playSong(song, songs)}
+
+onClick={handlePlay}
+
 className="
 absolute
 bottom-4
@@ -196,18 +245,25 @@ shadow-xl
 hover:scale-110
 active:scale-95
 "
+
 >
+
 ▶
+
 </button>
+
 
 </div>
 
 
 
 
-        {/* TITLE */}
 
-       <h3
+{/* TITLE */}
+
+
+<h3
+
 className="
 mt-4
 text-white
@@ -218,44 +274,70 @@ group-hover:text-green-400
 transition-all
 duration-300
 "
+
 >
+
 {song.title}
+
 </h3>
 
+
+
+
+
+{/* ARTIST */}
+
+
 <p
+
 className="
 mt-1
 text-sm
 text-gray-400
 truncate
 "
+
 >
-{song.artist?.name}
+
+{song.artist?.name || song.artist || "Unknown Artist"}
+
 </p>
 
 
 
 
-        {/* ACTIONS */}
 
-     <div
+{/* ACTIONS */}
+
+
+<div
+
 className="
 flex
 items-center
 justify-between
 mt-5
 "
+
 >
+
+
+
+{/* LIKE BUTTON */}
 
 <button
 
 onClick={
-liked
+song.isSpotify
+? undefined
+: liked
 ? handleUnlike
 : handleLike
 }
 
+
 className={`
+
 px-4
 py-2
 rounded-full
@@ -266,35 +348,103 @@ duration-300
 hover:scale-105
 active:scale-95
 
+
 ${
+song.isSpotify
+
+?
+
+"bg-gray-700 text-gray-400 cursor-not-allowed"
+
+:
+
 liked
-? "bg-red-500 text-white shadow-lg"
-: "bg-[#2c2c2c] text-white hover:bg-red-500"
+
+?
+
+"bg-red-500 text-white shadow-lg"
+
+:
+
+"bg-[#2c2c2c] text-white hover:bg-red-500"
+
 }
+
 `}
+
 >
 
-{liked ? "❤️ Liked" : "🤍 Like"}
+
+{
+
+song.isSpotify
+
+?
+
+"Spotify"
+
+:
+
+liked
+
+?
+
+"❤️ Liked"
+
+:
+
+"🤍 Like"
+
+}
+
 
 </button>
 
+
+
+
+
+{/* PLAYLIST BUTTON */}
+
+
 <button
 
-onClick={() => {
 
-if (!user) {
+onClick={()=>{
 
-alert("Please login first to add songs to playlist");
+
+if(song.isSpotify){
+
+alert(
+"Spotify songs cannot be added to playlist yet"
+);
 
 return;
 
 }
 
+
+
+if(!user){
+
+alert(
+"Please login first to add songs to playlist"
+);
+
+return;
+
+}
+
+
 setOpenModal(true);
+
 
 }}
 
+
+
 className="
+
 w-10
 h-10
 rounded-full
@@ -307,48 +457,61 @@ hover:bg-[#2d2d2d]
 transition-all
 duration-300
 hover:rotate-90
+
 "
+
 >
+
 
 <MoreVertical size={20}/>
 
+
 </button>
+
+
+
 
 </div>
 
 
-      </div>
+
+</div>
 
 
 
 
 
-      {/* PLAYLIST MODAL */}
 
-      {
-        user && (
-
-          <AddToPlaylistModal
-
-            open={openModal}
-
-            onClose={() => setOpenModal(false)}
-
-            song={song}
-
-          />
-
-        )
-      }
+{/* PLAYLIST MODAL */}
 
 
+{
 
-    </>
+user && !song.isSpotify && (
 
-  );
+<AddToPlaylistModal
+
+open={openModal}
+
+onClose={()=>setOpenModal(false)}
+
+song={song}
+
+/>
+
+)
+
+}
+
+
+
+
+</>
+
+);
+
 
 };
-
 
 
 export default SongCard;
