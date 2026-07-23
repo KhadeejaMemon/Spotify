@@ -34,17 +34,12 @@ const getAccessToken = async () => {
 
     return accessToken;
   } catch (error) {
-
-  console.log("========== SPOTIFY TOKEN ERROR ==========");
-
+  console.log("=========== SPOTIFY ERROR ===========");
   console.log(error.response?.status);
-
   console.log(error.response?.data);
-
   console.log(error.message);
 
   throw error;
-
 }
 };
 

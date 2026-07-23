@@ -22,10 +22,9 @@ const search = async (req, res) => {
     const artists = await Artist.find({
       name: { $regex: q, $options: "i" },
     });
-
-    const albums = await Album.find({
-      title: { $regex: q, $options: "i" },
-    }).populate("artists", "name image");
+const albums = await Album.find({
+  title: { $regex: q, $options: "i" },
+}).populate("artist", "name image");
 
     res.status(200).json({
       success: true,
