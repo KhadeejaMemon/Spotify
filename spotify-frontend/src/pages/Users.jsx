@@ -13,17 +13,7 @@ const Users = () => {
 
 
 const [users,setUsers] = useState([]);
-const [loading, setLoading] = useState(true);
-
-
-
-setLoading(true);
-
-const res = await getSongs();
-
-setSongs(res.data.songs);
-
-setLoading(false);
+  const [loading, setLoading] = useState(true);
 
 
 useEffect(()=>{
@@ -34,32 +24,21 @@ useEffect(()=>{
 
 
 
+const fetchUsers = async () => {
+  try {
+    setLoading(true);
 
-const fetchUsers = async()=>{
+    const res = await getUsers();
 
- try{
-
-
-  const res = await getUsers();
-
-
-  if(res.data.success){
-
-    setUsers(
-      res.data.users
-    );
-
+    if (res.data.success) {
+      setUsers(res.data.users);
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
   }
-
-
- }catch(error){
-
-  console.log(error);
-
- }
-
 };
-
 
 
 
@@ -129,7 +108,7 @@ if (loading) {
     <p className="text-white">
       Loading...
     </p>
-  );
+  ); 
 }
 
 return (

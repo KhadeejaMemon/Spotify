@@ -14,13 +14,7 @@ const Artistss = () => {
   const [artists,setArtists] = useState([]);
 const [loading, setLoading] = useState(true);
 
-setLoading(true);
 
-const res = await getSongs();
-
-setSongs(res.data.songs);
-
-setLoading(false);
 useEffect(()=>{
 
  fetchArtists();
@@ -29,22 +23,18 @@ useEffect(()=>{
 
 
 
-const fetchArtists = async()=>{
+const fetchArtists = async () => {
+  try {
+    setLoading(true);
 
- try{
+    const res = await getArtists();
 
- const res = await getArtists();
-
- setArtists(
-   res.data.artists || []
- );
-
- }catch(error){
-
- console.log(error);
-
- }
-
+    setArtists(res.data.artists || []);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
 };
 
 

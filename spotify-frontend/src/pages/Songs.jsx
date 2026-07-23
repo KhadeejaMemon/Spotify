@@ -16,13 +16,6 @@ const Songs = () => {
 
 
 
-setLoading(true);
-
-const res = await getSongs();
-
-setSongs(res.data.songs);
-
-setLoading(false);
  const handleDelete = async (id) => {
 
   const confirmDelete = window.confirm(
@@ -63,24 +56,20 @@ setLoading(false);
   }, []);
 
   const fetchSongs = async () => {
+  try {
+    setLoading(true);
 
-    try {
+    const res = await getSongs();
 
-      const res = await getSongs();
-
-      if (res.data.success) {
-
-        setSongs(res.data.songs);
-
-      }
-
-    } catch (error) {
-
-      console.log(error);
-
+    if (res.data.success) {
+      setSongs(res.data.songs);
     }
-
-  };
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+};
 if (loading) {
   return (
     <p className="text-white">

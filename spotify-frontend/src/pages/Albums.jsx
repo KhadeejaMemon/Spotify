@@ -9,13 +9,7 @@ const Albums = () => {
 
   const [loading, setLoading] = useState(true);
 
-setLoading(true);
 
-const res = await getSongs();
-
-setSongs(res.data.songs);
-
-setLoading(false);
 const handleDelete = async(id)=>{
 
   const confirmDelete = window.confirm(
@@ -66,13 +60,17 @@ const handleDelete = async(id)=>{
 
   const fetchAlbums = async () => {
   try {
+    setLoading(true);
+
     const res = await getAlbums();
 
-    if (res.success) {
-      setAlbums(res.albums);
+    if (res.data.success) {
+      setAlbums(res.data.albums);
     }
   } catch (error) {
     console.log(error);
+  } finally {
+    setLoading(false);
   }
 };
 if (loading) {
