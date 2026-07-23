@@ -24,42 +24,61 @@ const Navbar = () => {
 
 
 
-  const handleSearch = async (e) => {
+ const handleSearch = async (e) => {
 
-    const value = e.target.value;
+  const value = e.target.value;
 
-    setSearchQuery(value);
+  setSearchQuery(value);
 
 
-    if (value.trim() === "") {
+  if (value.trim() === "") {
 
-      setSearchResults([]);
+    setSearchResults([]);
 
-      return;
+    return;
 
+  }
+
+
+  try {
+
+    const [localRes, itunesRes] = await Promise.all([
+
+      API.get(`/search?q=${value}`),
+
+      API.get(`/spotify/search?q=${value}`)
+
+    ]);
+
+
+    let combinedResults = [];
+
+
+    if (localRes.data.success) {
+      combinedResults.push(...localRes.data.songs);
     }
 
 
-    try {
-
-      const res = await API.get(`/search?q=${value}`);
-
-
-      if (res.data.success) {
-
-        setSearchResults(res.data.songs);
-
-      }
-
-
-    } catch (error) {
-
-      console.log(error);
-
+    if (itunesRes.data.success) {
+      combinedResults.push(
+        ...itunesRes.data.songs.map((song) => ({
+          ...song,
+          isSpotify: true,
+        }))
+      );
     }
 
-  };
 
+    setSearchResults(combinedResults);
+
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
 
 
 
