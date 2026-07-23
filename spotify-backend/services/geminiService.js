@@ -82,12 +82,11 @@ Example:
     return JSON.parse(response.text);
 
   } catch (error) {
+  console.log("========== GEMINI ERROR ==========");
+  console.log(error.response?.data || error.message || error);
 
-    console.error("Gemini Error:", error);
-
-    throw error;
-
-  }
+  throw error;
+}
 };
 module.exports = {
   recommendSongs,

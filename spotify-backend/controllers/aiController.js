@@ -53,13 +53,14 @@ const getRecommendations = async (req, res) => {
       songs: recommendedSongs,
     });
   } catch (error) {
-    console.log(error);
+  console.log("========== AI ERROR ==========");
+  console.log(error);
 
-    res.status(500).json({
-      success: false,
-      message: "Failed to generate recommendations.",
-    });
-  }
+  res.status(500).json({
+    success: false,
+    message: error.message,
+  });
+}
 };
 
 module.exports = {
