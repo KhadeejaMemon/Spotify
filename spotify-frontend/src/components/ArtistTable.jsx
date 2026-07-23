@@ -68,11 +68,11 @@ const ArtistTable = ({ artists, onDelete }) => {
 
                     <img
 
-                      src={
-                        artist.image
-                        ? artist.image
-                        : "/default-user.png"
-                      }
+                     src={
+  artist.image
+    ? `https://spotify-backend-gilt.vercel.app${artist.image}`
+    : "/default-user.png"
+}
 
                       alt={artist.name}
 
