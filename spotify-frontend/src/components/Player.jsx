@@ -66,18 +66,22 @@ min-w-0
 >
 
 <img
-src={`https://spotify-backend-gilt.vercel.app${currentSong.thumbnail}`}
-alt={currentSong.title}
-className="
-w-14
-h-14
-rounded-xl
-object-cover
-shadow-lg
-hover:scale-105
-transition-all
-duration-300
-"
+  src={
+    currentSong.thumbnail?.startsWith("http")
+      ? currentSong.thumbnail
+      : `https://spotify-backend-gilt.vercel.app${currentSong.thumbnail}`
+  }
+  alt={currentSong.title}
+  className="
+  w-14
+  h-14
+  rounded-xl
+  object-cover
+  shadow-lg
+  hover:scale-105
+  transition-all
+  duration-300
+  "
 />
 
 <div className="min-w-0">
