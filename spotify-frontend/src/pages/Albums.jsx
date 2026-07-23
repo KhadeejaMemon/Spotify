@@ -64,8 +64,8 @@ const handleDelete = async(id)=>{
 
     const res = await getAlbums();
 
-    if (res.data.success) {
-      setAlbums(res.data.albums);
+    if (res.success) {
+      setAlbums(res.albums);
     }
   } catch (error) {
     console.log(error);
