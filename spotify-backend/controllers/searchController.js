@@ -2,6 +2,10 @@ const Song = require("../models/Song");
 const Artist = require("../models/Artist");
 const Album = require("../models/Album");
 
+// Escape special regex characters so search never crashes
+const escapeRegex = (text) =>
+  text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 const search = async (req, res) => {
   try {
     const { q } = req.query;
@@ -13,18 +17,21 @@ const search = async (req, res) => {
       });
     }
 
+    const safeQuery = escapeRegex(q);
+
     const songs = await Song.find({
-      title: { $regex: q, $options: "i" },
+      title: { $regex: safeQuery, $options: "i" },
     })
       .populate("artist", "name image")
       .populate("album", "title image");
 
     const artists = await Artist.find({
-      name: { $regex: q, $options: "i" },
+      name: { $regex: safeQuery, $options: "i" },
     });
-const albums = await Album.find({
-  title: { $regex: q, $options: "i" },
-}).populate("artist", "name image");
+
+    const albums = await Album.find({
+      title: { $regex: safeQuery, $options: "i" },
+    }).populate("artist", "name image");
 
     res.status(200).json({
       success: true,
