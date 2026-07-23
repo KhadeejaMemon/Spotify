@@ -34,9 +34,18 @@ const getAccessToken = async () => {
 
     return accessToken;
   } catch (error) {
-    console.log("Spotify Token Error:", error.response?.data || error.message);
-    throw error;
-  }
+
+  console.log("========== SPOTIFY TOKEN ERROR ==========");
+
+  console.log(error.response?.status);
+
+  console.log(error.response?.data);
+
+  console.log(error.message);
+
+  throw error;
+
+}
 };
 
 // Search Songs

@@ -42,13 +42,21 @@ const searchSpotifySongs = async (req, res) => {
     });
 
   } catch (error) {
-    console.log("Spotify Search Error:", error.response?.data || error.message);
 
-    res.status(500).json({
-      success: false,
-      message: "Failed to search Spotify.",
-    });
-  }
+  console.log("========== SPOTIFY SEARCH ERROR ==========");
+
+  console.log(error.response?.status);
+
+  console.log(error.response?.data);
+
+  console.log(error.message);
+
+  res.status(500).json({
+    success:false,
+    message:error.message
+  });
+
+}
 };
 
 module.exports = {
