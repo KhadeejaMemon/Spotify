@@ -12,9 +12,15 @@ const Artistss = () => {
   const navigate = useNavigate();
 
   const [artists,setArtists] = useState([]);
+const [loading, setLoading] = useState(true);
 
+setLoading(true);
 
+const res = await getSongs();
 
+setSongs(res.data.songs);
+
+setLoading(false);
 useEffect(()=>{
 
  fetchArtists();
@@ -93,7 +99,13 @@ console.log(error);
 };
 
 
-
+if (loading) {
+  return (
+    <p className="text-white">
+      Loading...
+    </p>
+  );
+}
 
 
 return (

@@ -13,7 +13,17 @@ const Users = () => {
 
 
 const [users,setUsers] = useState([]);
+const [loading, setLoading] = useState(true);
 
+
+
+setLoading(true);
+
+const res = await getSongs();
+
+setSongs(res.data.songs);
+
+setLoading(false);
 
 
 useEffect(()=>{
@@ -114,7 +124,13 @@ alert(
 
 
 
-
+if (loading) {
+  return (
+    <p className="text-white">
+      Loading...
+    </p>
+  );
+}
 
 return (
 

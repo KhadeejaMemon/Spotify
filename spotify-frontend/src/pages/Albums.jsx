@@ -6,6 +6,16 @@ import { deleteAlbum } from "../services/albumService";
 const Albums = () => {
   const [albums, setAlbums] = useState([]);
   const navigate = useNavigate();
+
+  const [loading, setLoading] = useState(true);
+
+setLoading(true);
+
+const res = await getSongs();
+
+setSongs(res.data.songs);
+
+setLoading(false);
 const handleDelete = async(id)=>{
 
   const confirmDelete = window.confirm(
@@ -65,7 +75,13 @@ const handleDelete = async(id)=>{
     console.log(error);
   }
 };
-
+if (loading) {
+  return (
+    <p className="text-white">
+      Loading...
+    </p>
+  );
+}
   return (
     <div className="p-8">
       <div className="flex justify-between items-center mb-6">

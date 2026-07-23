@@ -12,6 +12,17 @@ import { useNavigate } from "react-router-dom";
 const Songs = () => {
  const navigate = useNavigate();
   const [songs, setSongs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+
+
+setLoading(true);
+
+const res = await getSongs();
+
+setSongs(res.data.songs);
+
+setLoading(false);
  const handleDelete = async (id) => {
 
   const confirmDelete = window.confirm(
@@ -70,7 +81,13 @@ const Songs = () => {
     }
 
   };
-
+if (loading) {
+  return (
+    <p className="text-white">
+      Loading...
+    </p>
+  );
+}
   return (
 
     <div className="p-8">
