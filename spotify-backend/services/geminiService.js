@@ -11,7 +11,7 @@ const getClient = () => {
 
   return ai;
 };
-const MODEL = "gemini-2.5-flash";
+const MODEL = "gemini-flash-latest";   // 👈 sirf ye line change hui hai
 
 const recommendSongs = async (
   history = [],
